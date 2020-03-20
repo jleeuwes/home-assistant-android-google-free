@@ -49,8 +49,7 @@ class SensorWorker(private val appContext: Context, workerParams: WorkerParamete
 
         val sensorManagers = arrayOf(
             BatterySensorManager(),
-            NetworkSensorManager(),
-            GeocodeSensorManager()
+            NetworkSensorManager()
         )
 
         registerSensors(sensorManagers)

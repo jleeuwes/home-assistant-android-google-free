@@ -9,13 +9,6 @@ import android.location.Location
 import android.os.BatteryManager
 import android.os.Build
 import android.util.Log
-import com.google.android.gms.location.Geofence
-import com.google.android.gms.location.GeofencingEvent
-import com.google.android.gms.location.GeofencingRequest
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
 import io.homeassistant.companion.android.common.dagger.GraphComponentAccessor
 import io.homeassistant.companion.android.domain.integration.IntegrationUseCase
 import io.homeassistant.companion.android.domain.integration.UpdateLocation
@@ -95,70 +88,23 @@ class LocationBroadcastReceiver : BroadcastReceiver() {
     }
 
     private fun removeAllLocationUpdateRequests(context: Context) {
-        Log.d(TAG, "Removing all location requests.")
-        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-        val backgroundIntent = getLocationUpdateIntent(context, false)
-
-        fusedLocationProviderClient.removeLocationUpdates(backgroundIntent)
-
-        val geofencingClient = LocationServices.getGeofencingClient(context)
-        val zoneIntent = getLocationUpdateIntent(context, true)
-        geofencingClient.removeGeofences(zoneIntent)
+        Log.d(TAG, "STUB Removing all location requests.")
     }
 
     private fun requestLocationUpdates(context: Context) {
-        Log.d(TAG, "Registering for location updates.")
-
-        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
-        val intent = getLocationUpdateIntent(context, false)
-
-        fusedLocationProviderClient.requestLocationUpdates(
-            createLocationRequest(),
-            intent
-        )
+        Log.d(TAG, "STUB Registering for location updates.")
     }
 
     private suspend fun requestZoneUpdates(context: Context) {
-        Log.d(TAG, "Registering for zone based location updates")
-
-        try {
-            val geofencingClient = LocationServices.getGeofencingClient(context)
-            val intent = getLocationUpdateIntent(context, true)
-            val geofencingRequest = createGeofencingRequest()
-            geofencingClient.addGeofences(
-                geofencingRequest,
-                intent
-            )
-        } catch (e: Exception) {
-            Log.e(TAG, "Issue requesting zone updates.", e)
-        }
+        Log.d(TAG, "STUB Registering for zone based location updates")
     }
 
     private fun handleLocationUpdate(context: Context, intent: Intent) {
-        Log.d(TAG, "Received location update.")
-        LocationResult.extractResult(intent)?.lastLocation?.let {
-            if (it.accuracy > MINIMUM_ACCURACY) {
-                Log.w(TAG, "Location accuracy didn't meet requirements, disregarding: $it")
-            } else {
-                sendLocationUpdate(it, context)
-            }
-        }
+        Log.d(TAG, "STUB Received location update.")
     }
 
     private fun handleGeoUpdate(context: Context, intent: Intent) {
-        Log.d(TAG, "Received geofence update.")
-        val geofencingEvent = GeofencingEvent.fromIntent(intent)
-        if (geofencingEvent.hasError()) {
-            Log.e(TAG, "Error getting geofence broadcast status code: ${geofencingEvent.errorCode}")
-            return
-        }
-
-        if (geofencingEvent.triggeringLocation.accuracy > MINIMUM_ACCURACY) {
-            Log.w(TAG, "Geofence location accuracy didn't meet requirements, requesting new location.")
-            requestSingleAccurateLocation(context)
-        } else {
-            sendLocationUpdate(geofencingEvent.triggeringLocation, context)
-        }
+        Log.d(TAG, "STUB Received geofence update.")
     }
 
     private fun sendLocationUpdate(location: Location, context: Context) {
@@ -192,70 +138,7 @@ class LocationBroadcastReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun getLocationUpdateIntent(context: Context, isGeofence: Boolean): PendingIntent {
-        val intent = Intent(context, LocationBroadcastReceiver::class.java)
-        intent.action = if (isGeofence) ACTION_PROCESS_GEO else ACTION_PROCESS_LOCATION
-        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-    }
-
-    private fun createLocationRequest(): LocationRequest {
-        val locationRequest = LocationRequest()
-
-        locationRequest.interval = 60000 // Every 60 seconds
-        locationRequest.fastestInterval = 30000 // Every 30 seconds
-        locationRequest.maxWaitTime = 200000 // Every 5 minutes
-
-        locationRequest.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
-
-        return locationRequest
-    }
-
-    private suspend fun createGeofencingRequest(): GeofencingRequest {
-        val geofencingRequestBuilder = GeofencingRequest.Builder()
-        integrationUseCase.getZones().forEach {
-            geofencingRequestBuilder.addGeofence(
-                Geofence.Builder()
-                    .setRequestId(it.entityId)
-                    .setCircularRegion(
-                        it.attributes.latitude,
-                        it.attributes.longitude,
-                        it.attributes.radius
-                    )
-                    .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
-                    .build()
-            )
-        }
-        return geofencingRequestBuilder.build()
-    }
-
     private fun requestSingleAccurateLocation(context: Context) {
-        val maxRetries = 5
-        val request = createLocationRequest()
-        request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        request.numUpdates = maxRetries
-        LocationServices.getFusedLocationProviderClient(context)
-            .requestLocationUpdates(
-                request,
-                object : LocationCallback() {
-                    var numberCalls = 0
-                    override fun onLocationResult(locationResult: LocationResult?) {
-                        numberCalls++
-                        Log.d(TAG, "Got single accurate location update: ${locationResult?.lastLocation}")
-                        if (locationResult != null && locationResult.lastLocation.accuracy <= 1) {
-                            Log.d(TAG, "Location accurate enough, all done with high accuracy.")
-                            runBlocking { sendLocationUpdate(locationResult.lastLocation, context) }
-                            LocationServices.getFusedLocationProviderClient(context).removeLocationUpdates(this)
-                        } else if (numberCalls >= maxRetries) {
-                            Log.d(TAG, "No location was accurate enough, sending our last location anyway")
-                            runBlocking { sendLocationUpdate(locationResult!!.lastLocation, context) }
-                        } else {
-                            Log.w(TAG, "Location not accurate enough on retry $numberCalls of $maxRetries")
-                        }
-                    }
-                },
-                null
-            )
     }
 
     private fun getBatteryLevel(context: Context): Int? {
