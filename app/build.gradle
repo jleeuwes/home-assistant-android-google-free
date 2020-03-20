@@ -19,14 +19,18 @@ buildscript {
     }
 }
 
-def vCode = "${System.env.VERSION_CODE ?: 1}".toInteger()
-def vName = "1.7.2-${vCode}"
+// For the official app, vCode is set to the number of total commits;
+// we can't do that because of our branching model.
+// So we'll just count our versions,
+// leaving a gap for each upstream version just in case we want to add changes to older versions.
+def vCode = 100
+def vName = "1.7.2-without-google-${vCode}"
 
 android {
     compileSdkVersion projectSdkVersion.toInteger()
 
     defaultConfig {
-        applicationId "io.homeassistant.companion.android"
+        applicationId "eu.lwstn.homeassistant.companion.android"
         minSdkVersion projectMinSdkVersion
         targetSdkVersion 29
         versionCode vCode
