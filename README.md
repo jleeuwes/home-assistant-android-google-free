@@ -36,6 +36,6 @@ The actual app code is produced by creating a branch from an upstream version
 tag and applying the necessary changes.
 The following branches exist:
 
-* [1.8.0](tree/1.8.0-without-google)
-* [1.7.2](tree/1.7.2-without-google)
+* [1.8.0](https://github.com/jleeuwes/home-assistant-android-without-google/tree/1.8.0-without-google)
+* [1.7.2](https://github.com/jleeuwes/home-assistant-android-without-google/tree/1.7.2-without-google)
 
