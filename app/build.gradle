@@ -26,7 +26,7 @@ android {
     compileSdkVersion projectSdkVersion.toInteger()
 
     defaultConfig {
-        applicationId "eu.lwstn.homeassistant.companion.android"
+        applicationId "eu.lwstn.houseautomator.comrade.android"
         minSdkVersion projectMinSdkVersion
         targetSdkVersion 29
         versionCode vCode
