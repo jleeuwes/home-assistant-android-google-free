@@ -1,4 +1,6 @@
-# Home Assistant Companion App for Android, but without Google services
+# House Automator Comrade App for Android
+
+_Unofficial fork of the Home Assistant companion app without Google services._
 
 Home Assistant and the companion app are awesome,
 but they require proprietary services that are not available
