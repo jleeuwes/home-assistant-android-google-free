@@ -20,7 +20,7 @@ _USE AT YOUR OWN RISK_. I'm not sure how up-to-date I can keep this fork.
 
 1. **DONE** Remove proprietary services from the code,
    making sure the missing things are handled correctly.
-2. Change the branding to prevent <https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-584212855>
+2. **DONE** Change the branding to prevent <https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-584212855>
 3. Publish to [F-Droid](https://f-droid.org/)
 4. _(optional)_ Replace the missing functionality by FOSS alternatives,
    like those mentioned in <https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-581090179>
@@ -34,8 +34,7 @@ and icons.
 
 The actual app code is produced by creating a branch from an upstream version
 tag and applying the necessary changes.
-The following branches exist:
+The following branches are available:
 
 * [1.8.0](https://github.com/jleeuwes/home-assistant-android-without-google/tree/1.8.0-without-google)
-* [1.7.2](https://github.com/jleeuwes/home-assistant-android-without-google/tree/1.7.2-without-google)
 
