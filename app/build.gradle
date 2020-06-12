@@ -92,9 +92,12 @@ dependencies {
         exclude group: 'org.threeten'
     }
 
-    implementation('com.lokalise.android:sdk:2.0.0-beta-5')
-
     implementation "androidx.work:work-runtime-ktx:2.3.2"
+
+    // Added some dependencies that were missing after removing lokalise and fabric.
+    // Used the versions reported by Android Studio when lokalise and fabric were included.
+    implementation("com.squareup.okhttp3:okhttp:4.2.2")
+    implementation 'com.google.code.gson:gson:2.7'
 
     testImplementation "org.spekframework.spek2:spek-dsl-jvm:$spek2Version"
     testImplementation "org.spekframework.spek2:spek-runner-junit5:$spek2Version"

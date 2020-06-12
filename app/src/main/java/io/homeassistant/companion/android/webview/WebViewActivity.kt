@@ -28,8 +28,6 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.lokalise.sdk.LokaliseContextWrapper
-import com.lokalise.sdk.menu_inflater.LokaliseMenuInflater
 import io.homeassistant.companion.android.BuildConfig
 import io.homeassistant.companion.android.DaggerPresenterComponent
 import io.homeassistant.companion.android.PresenterModule
@@ -332,14 +330,6 @@ class WebViewActivity : AppCompatActivity(), io.homeassistant.companion.android.
                 enterPictureInPictureMode(mPictureInPictureParamsBuilder.build())
             }
         }
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LokaliseContextWrapper.wrap(newBase))
-    }
-
-    override fun getMenuInflater(): MenuInflater {
-        return LokaliseMenuInflater(this)
     }
 
     override fun openOnBoarding() {
