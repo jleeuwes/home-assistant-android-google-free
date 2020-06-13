@@ -1,6 +1,7 @@
 # House Automator Comrade App for Android
 
-_Unofficial fork of the Home Assistant companion app without Google services._
+_Unofficial fork of the Home Assistant companion app
+that doesn't depend on Google services or other non-free network services._
 
 Home Assistant and the companion app are awesome,
 but they require proprietary services that are not available
@@ -14,25 +15,39 @@ and [have suggested forking the project](https://github.com/home-assistant/home-
 
 This is such a fork.
 
-## Warning
+## What works
 
-_USE AT YOUR OWN RISK_. I'm not sure how up-to-date I can keep this fork.
+* Registering your device with your Home Assistant instance.
+* Full control of your Home Assistant instance.
 
-## The plan
+## What doesn't work
 
-1. **DONE** Remove proprietary services from the code,
-   making sure the missing things are handled correctly.
-2. **DONE** Change the branding to prevent <https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-584212855>
-3. Publish to [F-Droid](https://f-droid.org/)
-4. _(optional)_ Replace the missing functionality by FOSS alternatives,
-   like those mentioned in <https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-581090179>
+* Tracking the location of your mobile device.
+* Receiving push notifications on your mobile device.
+
+This missing functionality should be replaced by FOSS alternatives,
+like those mentioned in
+<https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-581090179>.
+Currently I have no plans to implement these myself.
+
+## Contributing
+
+The setup of this fork is a bit weird (see 'Branching').
+This is done to make it easy to cherry-pick my patches
+from version to version.
+
+I don't think this scheme is adequate
+when doing more serious work like implementing alternative push notifications.
+So if you are interested in contributing such changes,
+but are deterred by my git abuse,
+please contact me so we can work out a better development model.
 
 ## Branching
 
 The `master` branch of this fork is not based on the original repository
 and only contains meta stuff like this README,
-and later maybe stuff not related to a specific version of the app like scripts
-and icons.
+and some stuff not related to a specific version of the app,
+like scripts and icons.
 
 The actual app code is produced by creating a branch from an upstream version
 tag and applying the necessary changes.
