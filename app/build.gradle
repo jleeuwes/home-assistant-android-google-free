@@ -15,13 +15,6 @@ buildscript {
 }
 
 
-// For the official app, vCode is set to the number of total commits;
-// we can't do that because of our branching model.
-// So we'll just count our versions,
-// leaving a gap for each upstream version just in case we want to add changes to older versions.
-def vCode = 200
-def vName = "1.8.0-without-google-${vCode}"
-
 android {
     compileSdkVersion projectSdkVersion.toInteger()
 
@@ -29,8 +22,10 @@ android {
         applicationId "eu.lwstn.houseautomator.comrade.android"
         minSdkVersion projectMinSdkVersion
         targetSdkVersion 29
-        versionCode vCode
-        versionName vName
+        // versionCode needs to be incremented for each release, regardless of the version it is based on
+        versionCode 1
+        // versionName starts with versionCode, then the upstream version it is based on
+        versionName "1-based-on-1.8.0"
     }
 
     signingConfigs {
