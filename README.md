@@ -1,9 +1,9 @@
 # House Automator Comrade App for Android
 
-__There is now a build flavor of the official Home Assistant app without the proprietary stuff, which makes this fork obsolete. That app will soon be in the F-Droid repository, see https://gitlab.com/fdroid/fdroiddata/-/merge_requests/7387 :partying_face:__
-
 _Unofficial fork of the Home Assistant companion app
 that doesn't depend on Google services or other non-free network services._
+
+__:warning: There is now a build flavor of the official Home Assistant app without the proprietary stuff, which makes this fork obsolete. That app will soon be in the F-Droid repository, see https://gitlab.com/fdroid/fdroiddata/-/merge_requests/7387 :partying_face:__
 
 Home Assistant and the companion app are awesome,
 but they require proprietary services that are not available
