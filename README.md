@@ -3,46 +3,21 @@
 _Unofficial fork of the Home Assistant companion app
 that doesn't depend on Google services or other non-free network services._
 
-__:warning: There is now a build flavor of the official Home Assistant app without the proprietary stuff, which makes this fork obsolete. That app will soon be in the F-Droid repository, see https://gitlab.com/fdroid/fdroiddata/-/merge_requests/7387 :partying_face:__
-
 Home Assistant and the companion app are awesome,
 but they require proprietary services that are not available
 on custom Android OSes like [LineageOS](https://lineageos.org/).
 So, a version without those services is necessary.
 
-The developers of the official app
-[have no interest in maintaining such a version
-themselves](https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-584372676),
-and [have suggested forking the project](https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-560160840) instead.
+__This version now exists in the form of [a minimal build flavor of the official Home Assistant app](https://github.com/home-assistant/android/pull/682), which makes this fork obsolete. That app will soon be in the F-Droid repository, see https://gitlab.com/fdroid/fdroiddata/-/merge_requests/7387 :partying_face:__
 
-This is such a fork.
-
-## What works
-
-* Registering your device with your Home Assistant instance.
-* Full control of your Home Assistant instance.
-
-## What doesn't work
-
-* Tracking the location of your mobile device.
-* Receiving push notifications on your mobile device.
+## But what about push notifications an location tracking?
 
 This missing functionality should be replaced by FOSS alternatives,
 like those mentioned in
 <https://github.com/home-assistant/home-assistant-android/issues/42#issuecomment-581090179>.
-Currently I have no plans to implement these myself.
 
-## Contributing
-
-The setup of this fork is a bit weird (see 'Branching').
-This is done to make it easy to cherry-pick my patches
-from version to version.
-
-I don't think this scheme is adequate
-when doing more serious work like implementing alternative push notifications.
-So if you are interested in contributing such changes,
-but are deterred by my git abuse,
-please contact me so we can work out a better development model.
+Currently I have no plans to implement this.
+Also, it might be better to implement these as a separate flavor upstream, if upstream is open to that. 
 
 ## Branching
 
@@ -56,4 +31,3 @@ tag and applying the necessary changes.
 The following branches are available:
 
 * [1.8.0](https://github.com/jleeuwes/home-assistant-android-without-google/tree/1.8.0-without-google)
-
